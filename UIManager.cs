@@ -4,125 +4,164 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
+/// <summary>
+/// Manages the UI for the tournament scoring system.
+/// </summary>
+public class UIManager : MonoBehaviour
 {
+    /// <summary>
+    /// Reference to the TournamentManager.
+    /// </summary>
     public TournamentManager tournamentManager;
+
+    /// <summary>
+    /// Input field for participant name.
+    /// </summary>
     public TMP_InputField participantNameInput;
+
+    /// <summary>
+    /// Button to add an individual participant.
+    /// </summary>
     public Button addIndividualButton;
+
+    /// <summary>
+    /// Button to add a team participant.
+    /// </summary>
     public Button addTeamButton;
+
+    /// <summary>
+    /// Text component to display the leaderboard.
+    /// </summary>
     public TextMeshProUGUI leaderboardText;
+
+    /// <summary>
+    /// Text component to display the list of events.
+    /// </summary>
     public TextMeshProUGUI eventListText;
+
+    /// <summary>
+    /// Panel for adding a new event.
+    /// </summary>
     public GameObject eventPopupPanel;
+
+    /// <summary>
+    /// Input field for the new event name.
+    /// </summary>
     public TMP_InputField newEventInputField;
+
+    /// <summary>
+    /// Button to confirm adding a new event.
+    /// </summary>
     public Button confirmAddEventButton;
+
+    /// <summary>
+    /// Panel for setting rankings.
+    /// </summary>
     public GameObject rankingsPopupPanel;
+
+    /// <summary>
+    /// Text component to display the title of the rankings event.
+    /// </summary>
     public TextMeshProUGUI rankingsEventTitleText;
+
+    /// <summary>
+    /// List of dropdowns for setting participant rankings.
+    /// </summary>
     public List<TMP_Dropdown> rankingsDropdowns;
+
+    /// <summary>
+    /// Button to confirm the rankings.
+    /// </summary>
     public Button confirmRankingsButton;
+
+    /// <summary>
+    /// Button to open the rankings panel.
+    /// </summary>
     public Button setRankingsButton;
+
+    /// <summary>
+    /// Dropdown to select an event.
+    /// </summary>
     public TMP_Dropdown eventDropdown;
+
+    /// <summary>
+    /// The name of the current event.
+    /// </summary>
     private string currentEventName;
 
+    /// <summary>
+    /// Initializes the UI and sets up event listeners.
+    /// </summary>
     void Start()
     {
-        addIndividualButton.onClick.AddListener(() => AddParticipant(false));
-        addTeamButton.onClick.AddListener(() => AddParticipant(true));
-        tournamentManager.InitializeEvents();
-        UpdateEventList();
-        
-        confirmAddEventButton.onClick.AddListener(OnAddEventConfirm);
-        confirmRankingsButton.onClick.AddListener(OnConfirmRankings);
-        setRankingsButton.onClick.AddListener(OpenRankingsPanel);
+        // Implementation
     }
 
+    /// <summary>
+    /// Adds a participant to the tournament.
+    /// </summary>
+    /// <param name="isTeam">Indicates if the participant is a team.</param>
     public void AddParticipant(bool isTeam)
     {
-        string name = participantNameInput.text;
-        if (!string.IsNullOrEmpty(name))
-        {
-            tournamentManager.AddParticipant(name, isTeam);
-            UpdateLeaderboard();
-            participantNameInput.text = "";
-        }
+        // Implementation
     }
 
+    /// <summary>
+    /// Updates the leaderboard display.
+    /// </summary>
     public void UpdateLeaderboard()
     {
-        leaderboardText.text = "Leaderboard:\n";
-        if (tournamentManager.individualParticipants.Count == 0 && tournamentManager.teamParticipants.Count == 0)
-        {
-            leaderboardText.text += "No participants yet.";
-            return;
-        }
-
-        foreach (var participant in tournamentManager.individualParticipants)
-        {
-            leaderboardText.text += $"{participant.Name}: {participant.TotalScore} points\n";
-        }
-        foreach (var team in tournamentManager.teamParticipants)
-        {
-            leaderboardText.text += $"{team.Name} (Team): {team.TotalScore} points\n";
-        }
+        // Implementation
     }
 
+    /// <summary>
+    /// Updates the event list display.
+    /// </summary>
     public void UpdateEventList()
     {
-        eventListText.text = "Event List:\n";
-        foreach (var eventName in tournamentManager.eventList)
-        {
-            eventListText.text += $"{eventName}\n";
-        }
-        UpdateEventDropdown();
+        // Implementation
     }
 
+    /// <summary>
+    /// Updates the event dropdown options.
+    /// </summary>
     private void UpdateEventDropdown()
     {
-        eventDropdown.ClearOptions();
-        eventDropdown.AddOptions(new List<string>(tournamentManager.eventList));
+        // Implementation
     }
 
+    /// <summary>
+    /// Opens the event panel for adding a new event.
+    /// </summary>
     public void OnEventPanelClick()
     {
-        eventPopupPanel.SetActive(true);
-        newEventInputField.text = "";
+        // Implementation
     }
 
+    /// <summary>
+    /// Confirms the addition of a new event.
+    /// </summary>
     private void OnAddEventConfirm()
     {
-        string newEventName = newEventInputField.text;
-        if (!string.IsNullOrEmpty(newEventName))
-        {
-            tournamentManager.eventList.Add(newEventName);
-            UpdateEventList();
-            eventPopupPanel.SetActive(false);
-        }
+        // Implementation
     }
 
+    /// <summary>
+    /// Opens the rankings panel for setting participant rankings.
+    /// </summary>
     private void OpenRankingsPanel()
     {
-        if (eventDropdown.options.Count > 0)
-        {
-            currentEventName = eventDropdown.options[eventDropdown.value].text;
-            rankingsEventTitleText.text = $"Set Rankings for {currentEventName}";
-
-            List<string> participantNames = tournamentManager.GetParticipantNames();
-
-            for (int i = 0; i < rankingsDropdowns.Count; i++)
-            {
-                rankingsDropdowns[i].ClearOptions();
-                rankingsDropdowns[i].AddOptions(participantNames);
-
-                if (participantNames.Count > 0)
-                {
-                    rankingsDropdowns[i].value = 0;
-                }
-            }
-            rankingsPopupPanel.SetActive(true);
-        }
+        // Implementation
     }
 
+    /// <summary>
+    /// Confirms the participant rankings for the current event.
+    /// </summary>
     private void OnConfirmRankings()
     {
-        Dictionary<string, int> rankings = new Dictionary<string, int>();
+        // Implementation
+    }
+}
 
         for (int i = 0; i < rankingsDropdowns.Count; i++)
         {

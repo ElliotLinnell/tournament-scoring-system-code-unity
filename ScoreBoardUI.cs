@@ -5,15 +5,19 @@ public class ScoreboardUI : MonoBehaviour
 {
     public GameObject scoreboardPanel;
 
+    /// <summary>
+    /// Initializes the scoreboard panel by setting its local scale to zero,
+    /// effectively hiding it at the start of the game.
+    /// </summary>
     void Start()
     {
         scoreboardPanel.transform.localScale = Vector3.zero; 
-    }
+    } // end of Start
 
     public void ShowScoreboard()
     {
         StartCoroutine(AnimatePanel(scoreboardPanel));
-    }
+    } // end of ShowScoreboard
 
     private IEnumerator AnimatePanel(GameObject panel)
     {
@@ -31,5 +35,5 @@ public class ScoreboardUI : MonoBehaviour
         }
 
         panel.transform.localScale = endScale;
-    }
+    } // end of AnimatePanel
 }
